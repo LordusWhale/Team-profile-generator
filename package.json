@@ -5,6 +5,7 @@
     "node-fetch": "^2.0.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   }
 }
