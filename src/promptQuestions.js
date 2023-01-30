@@ -70,10 +70,17 @@ async function enterMoreEmployees() {
 
 async function listEmployees() {
   console.clear();
-  employeeGenerator.getEmployees().forEach((emp) => {
-    console.log(`${emp.getName()}||||${emp.getRole()}`);
-  });
-  await new Promise((r) => setTimeout(r, 2000));
+  console.table([employeeGenerator.getManager(), ...employeeGenerator.getEmployees()])
+  await inquirer.prompt([
+    {
+      name: "Go Back",
+      type: "list",
+      choices: [
+        {name: "Go back"}
+      ]
+      
+    }
+  ])
 }
 
 async function showMenuOptions() {
