@@ -7,7 +7,7 @@ describe("Intern class", () => {
         const intern = new Intern("name", 123, "email@email.com", 123);
         expect(intern.getRole()).toEqual("Intern");
     })
-    it("Should return the office id", () => {
+    it("Should return the correct school", () => {
         const school = "A school";
         const intern = new Intern("name", 123, "email@email.com", school);
         expect(intern.getSchool()).toEqual(school);
