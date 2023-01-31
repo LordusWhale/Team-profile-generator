@@ -3,7 +3,11 @@ const fs = require("fs");
 const { generateHtml } = require("./generateHtml");
 const { EmployeeGenerator } = require("../lib/employeeGenerator");
 
+// New instance of employee generator to easily create and get generated employees
+
 const employeeGenerator = new EmployeeGenerator();
+
+// Function to create html file with template 
 
 async function generateFile(path, file) {
   try {
@@ -26,6 +30,8 @@ async function askTypeOfEmployees() {
   ]);
 }
 
+// Promts user to select employee to delete then uses employeeGenerator to remove employee
+
 async function askDeleteEmp() {
   console.clear();
   let deletEmp = await inquirer.prompt([
@@ -45,6 +51,8 @@ async function askDeleteEmp() {
   employeeGenerator.deleteEmp(deletEmp.delete);
 }
 
+// Continuous loop to prompt user to enter more employees until they select "No"
+
 async function enterMoreEmployees() {
   console.clear();
   const generateEmpQuestion = [
@@ -60,6 +68,7 @@ async function enterMoreEmployees() {
   while (continueQuestions.more !== "No") {
     let type = await askTypeOfEmployees();
     console.clear();
+    // Generating employees based on answered prompts
     if (type.type === "Engineer") await employeeGenerator.generateEngineer();
     else await employeeGenerator.generateIntern();
     console.clear();
@@ -67,7 +76,7 @@ async function enterMoreEmployees() {
     console.clear();
   }
 }
-
+// Using console.table to display created employees
 async function listEmployees() {
   console.clear();
   console.table([employeeGenerator.getManager(), ...employeeGenerator.getEmployees()])
@@ -82,7 +91,8 @@ async function listEmployees() {
     }
   ])
 }
-
+// Menu options: Continuous loop until user selects to generate html file then returns all 
+// generated employees
 async function showMenuOptions() {
 
   let menuQuestions =  {
@@ -122,7 +132,7 @@ async function showMenuOptions() {
   return employeeGenerator.getAllEmployees();;
 }
 
-
+// Initialising function
 
 async function start() {
   await employeeGenerator.generateManager();
